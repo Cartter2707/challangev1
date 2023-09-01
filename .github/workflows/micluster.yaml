@@ -1,4 +1,4 @@
-name: deploy-eks
+name: Kubernetes Deploy
 
 on:
   push:
@@ -6,23 +6,23 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
+      
     steps:
-
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configurar Kubeconfig
-        run: |
-          echo "$KUBE_CONFIG_DATA" | base64 --decode > kubeconfig.yaml
-          kubectl config use-context mi-contexto
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: latest
 
-      - name: Despliegue a Kubernetes
+      - name: Deploy App (Deployment)
         run: |
-          kubectl apply -f deployment.yaml
-        env:
-          KUBECONFIG: ./kubeconfig.yaml
+          kubectl apply -f manifests/deploy.yml
+
+      - name: Deploy Service
+        run: |
+          kubectl apply -f manifests/service.yml
