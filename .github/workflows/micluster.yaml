@@ -16,7 +16,7 @@ jobs:
           nvm use 16
 
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configurar Kubeconfig
         run: |
