@@ -19,9 +19,9 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
           version: latest
 
-     - name: Despliegue a Kubernetes
-       run: |
-        kubectl apply -f manifiestos/deployment.yaml --server=http://192.168.49.2:32000
-       env:
-         KUBECONFIG: ./kubeconfig.yaml
+      - name: Despliegue a Kubernetes
+        run: |
+          kubectl apply -f manifiestos/deployment.yaml --server=http://192.168.49.2:32000
+        env:
+          KUBECONFIG: ./kubeconfig.yaml
 
