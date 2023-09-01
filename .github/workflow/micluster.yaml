@@ -18,7 +18,7 @@ jobs:
           echo "$KUBE_CONFIG_DATA" | base64 --decode > kubeconfig.yaml
           kubectl config use-context mi-contexto
         env:
-          KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
 
       - name: Despliegue a Kubernetes
         run: |
