@@ -1,4 +1,4 @@
-viuname: Kubernetes Deploy
+name: Kubernetes Deploy
 
 on:
   push:
