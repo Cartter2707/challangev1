@@ -1,4 +1,4 @@
-name: Kubernetes Deploy
+viuname: Kubernetes Deploy
 
 on:
   push:
@@ -21,4 +21,4 @@ jobs:
 
       - name: Despliegue a Kubernetes
         run: |
-          kubectl apply -f manifiestos/deployment.yaml --server=http://127.0.0.1:39937
+          kubectl apply -f manifiestos/service.yaml --server=http://127.0.0.1:39937
