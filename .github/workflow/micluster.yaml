@@ -1,0 +1,27 @@
+name: deploy-eks
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Configurar Kubeconfig
+        run: |
+          echo "$KUBE_CONFIG_DATA" | base64 --decode > kubeconfig.yaml
+          kubectl config use-context mi-contexto
+        env:
+          KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_DATA }}
+
+      - name: Despliegue a Kubernetes
+        run: |
+          kubectl apply -f deployment.yaml
+        env:
+          KUBECONFIG: ./kubeconfig.yaml
