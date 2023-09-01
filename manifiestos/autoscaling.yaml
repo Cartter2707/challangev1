@@ -1,0 +1,37 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: michallenge-hpa
+spec:
+  minReplicas: 2
+  maxReplicas: 4
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: michallengedeploy #recurso que será escalado por el HPA
+  behavior:
+    scaleDown: 
+      policies:
+      - type: Pods
+        value: 1 
+        periodSeconds: 10
+      - type: Percent
+        value: 20 
+        periodSeconds: 10
+      selectPolicy: Max
+      stabilizationWindowSeconds: 30 
+    scaleUp: 
+      policies: 
+      - type: Pods 
+        value: 5 
+        periodSeconds: 10 
+      - type: Percent
+        value: 40 
+        periodSeconds: 10
+      selectPolicy: Min
+      stabilizationWindowSeconds: 30
+      
+
+
+
+#el HPA escalará hacia abajo (reduce el numero de pods) cuando la utilización de CPU supere el 40% y escalará hacia arriba (agregará pods) cuando la utilización de CPU sea menor al 20%.

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-reverse-proxy # Nombre del deployment para el proxy inverso
+spec:
+  replicas: 2 #cantidad de pods a crear por el deployment.
+  selector:
+    matchLabels:
+      app: nginx-reverse-proxy #selecciona los pods con la etiqueta detallada mas abajo para ser administrados por el deployment.
+  template:
+    metadata:
+      labels:
+        app: nginx-reverse-proxy #etiqueta para los pods
+    spec:
+      containers:
+        - name: nginx-reverse-proxy-container
+          image: nginx:latest #version de la app a instalar
+          ports:
+            - containerPort: 8080
+

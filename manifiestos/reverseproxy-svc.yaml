@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-reverse-proxy-service # Nombre del servicio para el proxy inverso
+spec:
+  selector:
+    app: nginx-reverse-proxy #apunta a los pods con esta etiqueta
+  ports:
+    - protocol: TCP
+      port: 8080 #puerto expuesto en el servicio.
+      targetPort: 8080 #puerto en los pods a los que el tráfico del servicio será dirigido.
+
+#Este script crea un reverse proxy el cual redirige el tráfico hacia las réplicas del Deployment original de nginx.

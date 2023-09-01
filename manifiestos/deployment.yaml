@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: michallengedeploy #nombre del deployment.
+spec:
+  replicas: 2 #cantidad de replicas deseadas.
+  selector:
+    matchLabels:
+      app: nginxapp #selecciona los pods con la etiqueta detallada mas abajo para ser administrados por el deployment.
+  template:
+    metadata:
+      labels:
+        app: nginxapp #etiqueta para los pods generados por este deployment.
+    spec:
+      containers:
+        - name: contenedornginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "100m" # Requerimiento mínimo de CPU
+            limits:
+              memory: "500Mi"
+              cpu: "500m" # Límite máximo de CPU
+              
+#Este yml desplegará 2 replicas de nginx con su ultima version. Podrá referenciarse con la etiqueta nginexapp.
