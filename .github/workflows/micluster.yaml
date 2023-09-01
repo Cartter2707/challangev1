@@ -21,7 +21,7 @@ jobs:
 
       - name: Despliegue a Kubernetes
         run: |
-          kubectl apply -f manifiestos/deployment.yaml --server=http://http://127.0.0.1:39937
+          kubectl apply -f manifiestos/deployment.yaml --server=http://127.0.0.1:39937
         env:
           KUBECONFIG: ./kubeconfig.yaml
 
