@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use Node.js 16
-        run: |
-          nvm install 16
-          nvm use 16
 
       - name: Checkout repo
         uses: actions/checkout@v3
